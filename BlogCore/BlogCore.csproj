@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
+    <ProjectReference Include="..\BlogCore.AccesoDatos\BlogCore.AccesoDatos.csproj" />
   </ItemGroup>
 
 </Project>
