@@ -20,4 +20,9 @@
     <ProjectReference Include="..\BlogCore.AccesoDatos\BlogCore.AccesoDatos.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\imagenes\articulos\" />
+    <Folder Include="wwwroot\imagenes\sliders\" />
+  </ItemGroup>
+
 </Project>

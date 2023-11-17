@@ -14,5 +14,7 @@ namespace BlogCore.Data
         // Agregar cada uno de los modelos
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Articulo> Articulos { get; set; }
+
+        public DbSet<Slider> Sliders { get; set; } 
     }
 }
