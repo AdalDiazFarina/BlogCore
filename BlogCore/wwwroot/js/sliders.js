@@ -14,7 +14,7 @@ function cargarDatatable() {
         },
         "columns": [
             { "data": "id", "width": "5%" },
-            { "data": "nombre", "width": "70%" },
+            { "data": "nombre", "width": "20%" },
             /*EMPIEZA EDICION ESTADO*/
             {
                 "data": "estado",
@@ -41,7 +41,7 @@ function cargarDatatable() {
                                 </a>
                             </div>
                             `;
-                }, "width": "30%"
+                }, "width": "40%"
             }
         ],
         "language": {

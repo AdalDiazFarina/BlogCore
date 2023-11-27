@@ -1,6 +1,8 @@
+using BlogCore.AccesoDatos.Data.Inicializador;
 using BlogCore.AccesoDatos.Data.Repository;
 using BlogCore.AccesoDatos.Data.Repository.IRepository;
 using BlogCore.Data;
+using BlogCore.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,12 +14,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultUI();
 builder.Services.AddControllersWithViews();
 
 // Agregar contenedor de trabajo
 builder.Services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>();
+
+// Siempre de datos - Paso 1
+builder.Services.AddScoped<InicializadorDB>();
 
 var app = builder.Build();
 
@@ -32,6 +38,9 @@ else
 }
 app.UseStaticFiles();
 
+// Método que ejecuta la siembra de datos
+SiembraDeDatos();
+
 app.UseRouting();
 
 app.UseAuthorization();
@@ -42,3 +51,14 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+// Funcionalidad método SiembraDeDatos
+
+void SiembraDeDatos()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var inicializadorDb = scope.ServiceProvider.GetRequiredService<InicializadorDB>();
+        inicializadorDb.Inicializar();
+    }
+}
